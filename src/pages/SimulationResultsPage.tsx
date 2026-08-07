@@ -15,7 +15,8 @@ import { calcMonthlySavings } from '@/utils/simulation'
 import { AIInsightsCard } from '@/components/features/SimulationResults/AIInsightsCard' 
 
 export function SimulationResultsPage() {
-    const { id } = useParams<{ id: string }>()
+    const params = useParams()
+    const id = params.id ?? ''
     const { getFormData } = useSimulationStorage()
     const data = id ? getFormData(id) : null
 

@@ -8,7 +8,7 @@ import {
 } from 'lucide-react'
 
 import type { FormStepProps } from '@/components/features/Simulation/FormStep'
-import type { InsightData } from '@/services/aiService'
+import type { ChatMessage, InsightData } from '@/services/aiService'
 
 export const simulationFormSteps = [
   {
@@ -95,4 +95,8 @@ export interface SimulationFormData {
   goalAmount: string
   goalDeadline: string
 }
-export type SimulationRecord = SimulationFormData & { id: string; insight?: InsightData }
+export type SimulationRecord = SimulationFormData & {
+  id: string
+  insight?: InsightData
+  chatHistory?: ChatMessage[]
+}

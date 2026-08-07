@@ -6,6 +6,11 @@ interface GeminiResponse {
   }[]
 }
 
+export interface ChatMessage {
+  role: 'user' | 'assistant'
+  content: string
+}
+
 export interface InsightData {
   feasibility: {
     status: 'viable' | 'needs_adjustment' | 'unfeasible'
@@ -41,4 +46,9 @@ export const getInsight = async (prompt: string) => {
   const response = await callGeminiAPI(prompt)
   const json = response.candidates[0].content.parts[0].text
   return JSON.parse(json) as InsightData
+}
+
+export const getFollowUpReply = async (prompt: string) => {
+  const response = await callGeminiAPI(prompt)
+  return response.candidates[0].content.parts[0].text.trim()
 }

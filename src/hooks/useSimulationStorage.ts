@@ -2,34 +2,62 @@ import type { SimulationFormData, SimulationRecord } from '@/data/simulation'
 
 const LOCAL_STORAGE_KEY = 'simulation-data'
 
+const readStoredData = (): SimulationRecord[] => {
+  const storage = localStorage.getItem(LOCAL_STORAGE_KEY)
+  return storage ? (JSON.parse(storage) as SimulationRecord[]) : []
+}
+
+const writeStoredData = (data: SimulationRecord[]) => {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data))
+}
+
 export const useSimulationStorage = () => {
   const saveFormData = (formData: SimulationFormData) => {
     const id = crypto.randomUUID()
     const record: SimulationRecord = { ...formData, id }
-    const storage = localStorage.getItem(LOCAL_STORAGE_KEY)
-    const savedData = storage ? (JSON.parse(storage) as SimulationRecord[]) : []
+    const savedData = readStoredData()
 
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([...savedData, record]))
+    writeStoredData([...savedData, record])
     return id
   }
 
   const getFormData = (id: string): SimulationRecord | null => {
-    const storage = localStorage.getItem(LOCAL_STORAGE_KEY)
-    if (!storage) {
-      return null
-    }
-    const savedData = JSON.parse(storage) as SimulationRecord[]
+    const savedData = readStoredData()
     return savedData.find((record) => record.id === id) || null
   }
 
+  const getAllFormData = (): SimulationRecord[] => {
+    return [...readStoredData()].reverse()
+  }
+
   const updateSimulation = (id: string, data: SimulationRecord) => {
-    const storage = localStorage.getItem(LOCAL_STORAGE_KEY)
-    const savedData = storage ? (JSON.parse(storage) as SimulationRecord[]) : []
+    const savedData = readStoredData()
     const updated = savedData.map((record) =>
       record.id === id ? { ...data } : record
     )
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updated))
+    writeStoredData(updated)
   }
 
-  return { saveFormData, getFormData, updateSimulation }
+  const saveChatHistory = (id: string, chatHistory: SimulationRecord['chatHistory']) => {
+    const savedData = readStoredData()
+    const updated = savedData.map((record) =>
+      record.id === id ? { ...record, chatHistory } : record
+    )
+    writeStoredData(updated)
+  }
+
+  const deleteSimulation = (id: string) => {
+    const savedData = readStoredData()
+    const filtered = savedData.filter((record) => record.id !== id)
+    writeStoredData(filtered)
+  }
+
+  return {
+    saveFormData,
+    getFormData,
+    getAllFormData,
+    updateSimulation,
+    deleteSimulation,
+    saveChatHistory,
+  }
 }

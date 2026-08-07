@@ -26,7 +26,10 @@ export function Header() {
           <Button
             variant="secondary"
             icon={TrendingUp}
-            onClick={() => void navigate('/')}
+            onClick={() => {
+              navigate('/', { replace: true })
+              window.location.assign('/')
+            }}
           >
             <span className="hidden sm:inline">Nova Simulação</span>
           </Button>

@@ -20,12 +20,13 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true
-  },
-  "include": ["src"],
-  
-  "baseUrl": ".",
+    "noFallthroughCasesInSwitch": true,
+    "ignoreDeprecations": "6.0",
+
+    "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-}
+    }
+  },
+  "include": ["src"]
 }

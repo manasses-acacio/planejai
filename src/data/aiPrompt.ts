@@ -1,4 +1,4 @@
-import type { SimulationRecord } from '@/hooks/useSimulationStorage'
+import type { SimulationRecord } from '@/data/simulation'
 import { parseCurrency } from '@/utils/currency'
 import { calcMonthlySavings } from '@/utils/simulation'
 

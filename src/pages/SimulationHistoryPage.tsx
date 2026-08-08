@@ -9,36 +9,37 @@ import type { SimulationRecord } from '@/data/simulation'
 
 function HistoryItem({ simulation, onDelete, onViewDetails }: { simulation: SimulationRecord; onDelete: (id: string) => void; onViewDetails: (id: string) => void }) {
   const monthlySavings = calcMonthlySavings(simulation)
+  const simulationDate = new Date().toLocaleDateString('pt-BR')
 
   return (
-    <li className="bg-card ml-[15px] flex flex-col gap-4 rounded-2xl border border-border/60 pt-5 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.12)] sm:ml-0 sm:flex-row sm:items-start sm:justify-between">
-      <div className="flex flex-1 flex-col gap-4 pl-[15px] sm:pl-0">
-        <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="bg-primary/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-primary sm:h-14 sm:w-14">
-            <Goal size={24} />
+    <li className="bg-card ml-[24px] flex flex-col gap-2 rounded-2xl border border-border/60 px-2.5 pt-3 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.12)] sm:ml-0 sm:flex-row sm:items-center sm:justify-between sm:px-4">
+      <div className="flex flex-1 flex-col gap-2 pl-[4px] sm:flex-row sm:items-center sm:gap-3 sm:pl-0">
+        <div className="flex items-center gap-2 sm:min-w-[220px]">
+          <div className="bg-primary/10 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-primary sm:h-11 sm:w-11">
+            <Goal size={18} />
           </div>
           <div className="min-w-0">
-            <p className="text-foreground text-lg font-semibold">{simulation.goalName || 'Meta sem nome'}</p>
-            <p className="text-muted-foreground mt-1 text-sm">Resumo da simulação salva</p>
+            <p className="text-foreground text-sm font-semibold">{simulation.goalName || 'Meta sem nome'}</p>
+            <p className="text-muted-foreground mt-0.5 text-[11px]">{simulationDate}</p>
           </div>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          <div className="rounded-xl bg-background/40 p-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Custo da meta</p>
-            <p className="text-foreground mt-2 text-sm font-semibold">{simulation.goalAmount}</p>
+        <div className="grid gap-1.5 sm:grid-cols-4 sm:flex-1">
+          <div className="rounded-lg bg-background/40 p-2">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-primary">Custo da meta</p>
+            <p className="text-foreground mt-1 text-xs font-semibold">{simulation.goalAmount}</p>
           </div>
-          <div className="rounded-xl bg-background/40 p-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Prazo</p>
-            <p className="text-foreground mt-2 text-sm font-semibold">{simulation.goalDeadline} meses</p>
+          <div className="rounded-lg bg-background/40 p-2">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-primary">Prazo</p>
+            <p className="text-foreground mt-1 text-xs font-semibold">{simulation.goalDeadline} meses</p>
           </div>
-          <div className="rounded-xl bg-background/40 p-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Economia mensal</p>
-            <p className="text-foreground mt-2 text-sm font-semibold">R$ {monthlySavings.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+          <div className="rounded-lg bg-background/40 p-2">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-primary">Economia mensal</p>
+            <p className="text-foreground mt-1 text-xs font-semibold">R$ {monthlySavings.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
           </div>
-          <div className="rounded-xl bg-background/40 p-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Renda</p>
-            <p className="text-foreground mt-2 text-sm font-semibold">{simulation.income}</p>
+          <div className="rounded-lg bg-background/40 p-2">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-primary">Renda</p>
+            <p className="text-foreground mt-1 text-xs font-semibold">{simulation.income}</p>
           </div>
         </div>
       </div>

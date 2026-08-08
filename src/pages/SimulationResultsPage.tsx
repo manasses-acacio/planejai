@@ -27,10 +27,12 @@ export function SimulationResultsPage() {
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 sm:py-14">
-      <PageHero
-        title="Resultado da Simulação"
-        subtitle="com base no seu perfil financeiro e objetivo."
-      />
+      <div className="mb-6">
+        <PageHero
+          title="Resultado da Simulação"
+          subtitle="com base no seu perfil financeiro e objetivo."
+        />
+      </div>
     <div className="mb-6 grid grid-cols-1 gap-4 lg:grid-cols-3">
         <Card
           icon={Goal}

@@ -37,7 +37,10 @@ export function Header() {
           <Button
             variant="ghost"
             icon={Clock}
-            onClick={() => void navigate('/historico')}
+            onClick={() => {
+              navigate('/historico')
+              window.location.assign('/historico')
+            }}
           >
             <span className="hidden sm:inline">Histórico</span>
           </Button>
